@@ -1,6 +1,5 @@
-#ifndef INSUMO_H_
-#define INSUMO_H_
-
+#pragma once
+#include <iostream>
 #include <string>
 
 class Insumo {
@@ -25,7 +24,6 @@ class Insumo {
     void setQuantidade(int);
 
     // GET Methods
-    virtual std::string getDescricao();
+    std::string getDescricao();
+    void getNome();
 };
-
-#endif /* INSUMO_H_ */

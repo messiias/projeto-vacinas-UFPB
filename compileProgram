@@ -1,0 +1,5 @@
+#!/usr/bin/bash
+
+g++ -o main src/classes/Insumos/Insumos.cpp src/classes/EPI/Epi.cpp src/classes/Medicamentos/Medicamentos.cpp src/main.cpp
+
+./main
