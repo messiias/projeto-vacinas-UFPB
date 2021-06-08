@@ -11,14 +11,6 @@ class Vacina : public Insumo{
   
   public:
     Vacina();
-
-    void setDescricaoTipoVacina(std::string);
-    void setDoseVacina(int);
-    void setIntervaloDose(int);
-
-    void setDescricaoTipoVacina();
-    void setDoseVacina();
-    void setIntervaloDose();
 };
 
 #endif
