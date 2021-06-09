@@ -2,15 +2,20 @@
 #include <string>
 #include "../Insumos/Insumos.h"
 
-class Medicamentos : public Insumo
-{
+class Medicamentos : public Insumo {
   private:
-    //Atributos
     std::string dosagemMedicamentos;
     std::string formaAdministracao;
     std::string formaDisponibilizacao;
 
   public: 
-    // Construtor
     Medicamentos();
+
+    //SET Methods
+    void setDosagem(std::string);
+    void setFormaAdmin(std::string);
+    void setDisponibilizacao(std::string);
+
+    // GET Methods
+    std::string getDescricao();
 };

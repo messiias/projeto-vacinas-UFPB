@@ -1,5 +1,7 @@
 #!/usr/bin/bash
 
-g++ -o main src/classes/Insumos/Insumos.cpp src/classes/EPI/Epi.cpp src/classes/Medicamentos/Medicamentos.cpp src/main.cpp
+g++ -o main src/models/Insumos/Insumos.cpp src/models/Vacina/Vacina.cpp src/models/EPI/Epi.cpp src/models/Medicamentos/Medicamentos.cpp src/views/main.cpp
 
 ./main
+
+rm main

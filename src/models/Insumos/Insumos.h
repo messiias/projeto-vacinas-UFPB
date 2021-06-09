@@ -14,5 +14,16 @@ class Insumo{
     int tipoInsumo;
 
   public:
-    virtual void setInfo() = 0;
+    Insumo();
+
+    //SET Methods
+    void setNome(std::string);
+    void setQuantidadeItem(int);
+    void setValorUnitario(int);
+    void setDataVencimento(std::string);
+    void setFabricante(std::string);
+
+    //GET Method
+    virtual std::string getDescricao();
+    int getTipoInsumo();
 };

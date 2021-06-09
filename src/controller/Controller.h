@@ -1,11 +1,12 @@
 #pragma once
 #include <string>
+#include <vector>
 #include "../Insumos/Insumos.h"
 #include "../Local/Local.h"
 
 class Controller {
   private:
-    Local locais[28];
+    std::vector< Local > locais;
 
   public:
     Controller();

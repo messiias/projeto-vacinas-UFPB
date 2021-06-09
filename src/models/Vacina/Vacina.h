@@ -1,6 +1,5 @@
-#ifndef VACINA_H_
-#define VACINA_H_
-#include<string>
+#pragma once
+#include <string>
 #include "../Insumos/Insumos.h"
 
 class Vacina : public Insumo{
@@ -11,6 +10,12 @@ class Vacina : public Insumo{
   
   public:
     Vacina();
-};
 
-#endif
+    // SET Methods
+    void setTipoVacina(std::string);
+    void setDose(int);
+    void setIntervalo(int);
+
+    // GET Methods
+    std::string getDescricao();
+};
