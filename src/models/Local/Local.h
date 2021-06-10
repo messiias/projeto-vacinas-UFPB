@@ -8,10 +8,13 @@ class Local {
   private:
     std::string localNome;
     int tipo;
-    std::vector< Insumo * > Ins;
+    std::vector< Insumo* > locais;
 
   public:
     Local();
+    // SET Methods
+    void setInsumoParaLocal();
 
-    void setCadastroInsumo();
+    // GET Methods
+    std::vector < Insumo* > getLocais();
 };

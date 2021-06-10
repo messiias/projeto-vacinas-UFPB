@@ -1,10 +1,10 @@
 #include <string>
+#include <vector>
 #include "Local.h"
 
-// CONSTRUTOR
+Local::Local() {}
 
-Local::Local(){
-  localNome = "";
-  tipo = 0;
+std::vector < Insumo* > Local::getLocais() {
+  return this->locais;
 }
 

@@ -15,29 +15,13 @@ void Controller::cadastraInsumosMS(Insumo *novoElemento){
   this->insumosMS.push_back(novoElemento);
 }
 
-/* void Controller::consultaInsumos(Local locais){
-    int userValue;
+void Controller::consultaInsumos(Local insumosCadastrados) {
+  std::vector < Insumo* > teste = insumosCadastrados.getLocais();
 
-    cout << "Deseja consultar estoque de qual insumo?\n1: Vacina;\n2: Medicamentos;\n3: EPI;\n: ";
-    cin >> userValue;
-    
-    switch (userValue)
-    {
-    case 1:
-
-        for(i = 0 ; i < locais.Ins.size(), i++){
-            // ...;
-        }
-        break;
-    case 2:
-        
-        break;
-
-    default:
-        break;
-    }
-
-} */
+  /* for(auto x: teste) {
+    teste.at();
+  } */
+}
 
 /* void Controller::consultaInsumosDescricao(Local locais){
     int userValue;
