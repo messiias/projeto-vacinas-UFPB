@@ -1,6 +1,6 @@
 #!/usr/bin/bash
 
-g++ -o main src/models/Insumos/Insumos.cpp src/models/Vacina/Vacina.cpp src/models/EPI/Epi.cpp src/models/Medicamentos/Medicamentos.cpp src/views/main.cpp
+g++ -o main src/models/Insumos/Insumos.cpp src/models/Vacina/Vacina.cpp src/models/EPI/Epi.cpp src/models/Medicamentos/Medicamentos.cpp src/models/Local/Local.cpp src/controller/Controller.cpp src/views/Menu/Menu.cpp src/views/main.cpp
 
 ./main
 

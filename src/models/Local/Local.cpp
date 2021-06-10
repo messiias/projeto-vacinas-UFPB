@@ -4,7 +4,13 @@
 
 Local::Local() {}
 
-std::vector < Insumo* > Local::getLocais() {
-  return this->locais;
+// SET Methods
+
+
+// GET Methods
+std::string Local::getNomeEstado() {
+  this->localNome;
 }
+
+
 

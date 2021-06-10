@@ -24,6 +24,10 @@ void Insumo::setFabricante(std::string fabricante) {
   this->nomeFabricante = fabricante;
 };
 
+void Insumo::setTipoInsumo(int tipoInsumo) {
+  this->tipoInsumo = tipoInsumo;
+};
+
 std::string Insumo::getDescricao() {
   
   std::string descricao;

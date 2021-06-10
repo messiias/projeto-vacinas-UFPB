@@ -1,158 +1,95 @@
 #include <iostream>
 #include <string>
 #include "Menu.h"
+#include "cadastraInsumosMSFunction.cpp"
 #include "../../controller/Controller.h"
 #include "../../models/Insumos/Insumos.h"
 #include "../../models/Medicamentos/Medicamentos.h"
 #include "../../models/Vacina/Vacina.h"
 #include "../../models/EPI/Epi.h"
 
-using namespace std;
-
 void Menu::Menu1(){
   Controller *instControl = new Controller();
 
-  int userValue;
+  int userValue = 0;
+  bool loop = true;
 
-  cout << "=============================\n\tMinisterio da saúde\t\n=============================";
+  while(loop){
+    system("clear");
+    std::cout << "=============================\n\tMinisterio da saúde\t\n=============================" << std::endl << std::endl;
 
-  cout << "1 - Cadastrar insumo no MS\n2 - Consulta insumos disponiveis no MS\n3 - Descrição dos insumos no MS\n" << endl;
-  cout << "4 - Cadastrar Tipo do insumo\n5 - Distribui insumos pros estados\n6- Sair\n: ";
-  cin >> userValue;
-  
-  switch (userValue)
-  {
-  case 1:
-    cout << "Qual insumo deseja inserir no MS?\n1 - Vacina\n2 - Medicamento\n3 - EPI\n: ";
-    cin >> userValue;
+    std::cout << "1 - Cadastrar insumo no MS\n2 - Consulta insumos disponiveis no MS\n3 - Descrição dos insumos no MS\n" << std::endl;
+    std::cout << "4 - Distribui insumos pros estados\n5 - Consulta insumos disponiveis em um estado\n6 - Descrição dos insumos em um estado\n7 - Sair\n: ";
+    std::cin >> userValue;
+    
+    switch (userValue) {
+      case 1:
+        system("clear");
+        std::cout << "Qual insumo deseja inserir no MS?\n1 - Vacina\n2 - Medicamento\n3 - EPI\n4 - Sair: ";
+        std::cin >> userValue;
+        if(userValue >= 1 && userValue <= 3)
+          instControl->cadastraInsumosMS(cadastroDeInsumoMS(userValue));
+        break;
 
-    instControl->cadastraInsumosMS(cadastraDeInsumoMS(userValue));
-    break;
-  case 2:
-    consultaInsumos(Local);
-    break;
-  case 3:
-    consultaInsumosDescricao(Local);
-    break;
-  case 4:
-    cadastraInsumosTipo(Local, int);
-    break;
-  case 5:
-    distribuiInsumo(Local, Insumo);
-    break;
-  case 6:
-    /* SAIR */
-    break;
-  default:
-    cout << "Opção Invalida" << endl;
-    break;
+      case 2:
+        system("clear");
+        std::cout << "Qual insumo deseja consultar do MS?\n1 - Todos\n2 - Vacina\n3 - Medicamento\n4 - EPI\n5 - Sair: ";
+        std::cin >> userValue;
+        if(userValue >= 1 && userValue <= 4)
+          instControl->consultaInsumosMS(userValue);
+        break;
+      /*
+      case 3:
+        std::cout << "Qual insumo deseja consultar do MS?\n1 - Vacina\n2 - Medicamento\n3 - EPI\n4 - Sair: ";
+        if(userValue >= 1 && userValue <= 3)
+          instControl->consultaDescricaoInsumoMS(userValue);
+        break;
+
+      case 4:
+        menuDistribuiEstado();
+        break;
+      */
+      /*
+      case 4:
+        cadastraInsumosTipo(Local, int);
+        break;
+      case 5:
+        distribuiInsumo(Local, Insumo);
+        break;
+      */
+      case 7:
+        loop = false;
+        break;
+      default:
+        std::cout << "Opção Invalida" << std::endl;
+        break;
+    }
   }
 }
 
-Insumo* cadastraDeInsumoMS(int userValue){
+/*
+void menuDistribuiEstado(){
 
-  // Insumos
-  string nome;
-  int quantidadeItem;
-  int valorUnitario;
-  string dataVencimento;
-  string fabricante;
-  int tipoInsumo;
+  int userValueES, userValueInsumo;
 
-  // Vacinas
-  string tipoVacina;
-  int dose;
-  int intervaloDose;
+  cout << " === Estados para distribuir === " << std::endl << std::endl;
+  cout << "1 - Acre (AC)\t2 - Alagoas (AL)\t3 - Amapá (AP)\t4 - Amazonas (AM)\t5 - Bahia (BA)" << std::endl;
+  cout << "6 - Ceará (CE)\t7 - Distrito Federal (DF)\t8 - Espírito Santo (ES)\t9 - Goiás (GO)\t10 - Maranhão (MA)" << std::endl; 
+  cout << "11 - Mato Grosso (MT)\t12 - Mato Grosso do Sul (MS)\t13 - Minas Gerais (MG)\t14 - Pará (PA)\t15 - Paraíba (PB)" << std::endl;
+  cout << "16 - Paraná (PR)\t17 - Pernambuco (PE)\t18 - Piauí (PI)\t19 - Rio de Janeiro (RJ)\t20 - Rio Grande do Norte (RN)" << std::endl;
+  cout << "21 - Rio Grande do Sul (RS)\t22 - Rondônia (RO)\t23 - Roraima (RR)\t24 - Santa Catarina (SC)\t25 - São Paulo (SP)" << std::endl;
+  cout << "26 - Sergipe (SE)\t27 - Tocantins (TO)" << std::endl << std::endl;
+  cout << "Selecione o número respectivo do estado: ";
+  cin >> userValueES;
 
-  // Medicamentos
-  string dosagemMedicamentos;
-  string formaAdministracao;
-  string formaDisponibilizacao;
-  
-  // EPI
-  string tipoEpi;
-  string infoEpi;
-  
-  switch (userValue)
-  {
-  case 1:
-    Vacina *vac = new Vacina();
-    Insumo *teste = vac;
+  cout << "\nDeseja inserir qual insumo?" << std::endl;
+  cout << "1 - Vacina   2 - Medicamento   3 - EPI   4 - Voltar para o menu anterior" << std::endl;
+  cout << "Digite a opcao: ";
+  cin >> userValueInsumo;
 
-    cout << "Digite o nome da vacina: ";
-    cin >> nome;
-    vac->setNome(nome);
-    
-    cout << "Quantidade de itens: ";
-    cin >> quantidadeItem;
-    vac->setQuantidadeItem(quantidadeItem);
-
-    cout << "Valor unitario: ";
-    cin >> valorUnitario;
-    vac->setValorUnitario(valorUnitario);
-
-    cout << "Data de vencimento: ";
-    cin >> dataVencimento;
-    vac->setDataVencimento(dataVencimento);
-
-    cout << "Fabricante: ";
-    cin >> fabricante;
-    vac->setFabricante(fabricante);
-
-    cout << "Tipo da vacina: ";
-    cin >> tipoVacina;
-    vac->setTipoVacina(tipoVacina);
-
-    cout << "Doses:  ";
-    cin >> dose;
-    vac->setDose(dose);
-
-    cout << "Intervalo: ";
-    cin >> intervaloDose;
-    vac->setIntervalo(intervaloDose);
-
-    return teste;
-  case 2:
-
-    Medicamentos *med = new Medicamentos;
-    
-    cout << "Digite o nome da vacina: ";
-    cin >> nome;
-    med->setNome(nome);
-    
-    cout << "Quantidade de itens: ";
-    cin >> quantidadeItem;
-    med->setQuantidadeItem(quantidadeItem);
-
-    cout << "Valor unitario: ";
-    cin >> valorUnitario;
-    med->setValorUnitario(valorUnitario);
-
-    cout << "Data de vencimento: ";
-    cin >> dataVencimento;
-    med->setDataVencimento(dataVencimento);
-
-    cout << "Fabricante: ";
-    cin >> fabricante;
-    med->setFabricante(fabricante);
-
-    cout << "Dosagem: ";
-    cin >> dosagemMedicamentos;
-    med->setDosagem(dosagemMedicamentos);
-
-    cout << "Forma de administração: ";
-    cin >> formaAdministracao;
-    med->setFormaAdmin(formaAdministracao);
-    
-    cout << "Forma de disponibilização: ";
-    cin >> formaDisponibilizacao;
-    med->setDisponibilizacao(formaDisponibilizacao);
-
-    return med;
-
-  
-  default:
-    break;
-  }
-
+  distribuiParaEstado(userValueES, userValueInsumo);
 }
+
+Insumo* distribuiParaEstado(int userValueES, int userValueInsumo){
+
+}*/

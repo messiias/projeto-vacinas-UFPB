@@ -1,41 +1,12 @@
 #include <iostream>
 #include <string>
-#include <vector>
-#include "../models/Insumos/Insumos.h"
-#include "../models/EPI/Epi.h"
-#include "../models/Medicamentos/Medicamentos.h"
-#include "../models/Vacina/Vacina.h"
+#include "Menu/Menu.h"
 
-/**
- * 1 - Vacina
- * 2 - Medicamento
- * 3 - EPI
-*/
 
 int main(void){
-
-  Vacina *teste = new Vacina();
-  Insumo *testeArray[1];
-
-  Insumo testee = Insumo();
-
-  std::vector < std::string, int > testeeArray;
-  testeeArray.push_back(0);
+  Menu *primeiroMenu = new Menu();
   
-  teste->setNome("Ivermectina");
-  teste->setQuantidadeItem(100);
-  teste->setValorUnitario(20);
-  teste->setDataVencimento("21/06/2021");
-  teste->setFabricante("ERM");
-  teste->setTipoVacina("RNA Mensageiro");
-  teste->setDose(2);
-  teste->setIntervalo(28);
+  primeiroMenu->Menu1();
 
-  std::cout << teste->getDescricao() << std::endl;
-
-  testeArray[0] = teste;
-
-  std::cout << testeArray[0]->getTipoInsumo() << std::endl;
-  
   return 0;
 }

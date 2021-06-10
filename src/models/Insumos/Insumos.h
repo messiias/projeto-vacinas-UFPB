@@ -22,6 +22,7 @@ class Insumo{
     void setValorUnitario(int);
     void setDataVencimento(std::string);
     void setFabricante(std::string);
+    void setTipoInsumo(int);
 
     //GET Method
     virtual std::string getDescricao();

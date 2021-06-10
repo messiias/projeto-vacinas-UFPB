@@ -12,9 +12,12 @@ class Local {
 
   public:
     Local();
+
     // SET Methods
+    void setLocal(std::string);
     void setInsumoParaLocal();
 
     // GET Methods
-    std::vector < Insumo* > getLocais();
+    std::string getNomeEstado();
+    int getTipo();
 };
