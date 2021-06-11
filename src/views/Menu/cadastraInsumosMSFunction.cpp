@@ -71,6 +71,7 @@ Insumo* cadastroDeInsumoMS(int userValue){
       std::cin >> intervaloDose;
       vac->setIntervalo(intervaloDose);
 
+      system("clear");
       return vac;
       
     case 2:
@@ -109,6 +110,7 @@ Insumo* cadastroDeInsumoMS(int userValue){
       std::cin >> formaDisponibilizacao;
       med->setDisponibilizacao(formaDisponibilizacao);
 
+      system("clear");
       return med;
     
     case 3:
@@ -144,6 +146,7 @@ Insumo* cadastroDeInsumoMS(int userValue){
       std::cin >> infoEpi;
       epi->setInfoEpi(infoEpi);
 
+      system("clear");
       return epi;
     }
 

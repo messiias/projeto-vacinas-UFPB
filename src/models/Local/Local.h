@@ -6,7 +6,7 @@
 
 class Local {
   private:
-    std::string localNome;
+    std::vector<std::string> localNome;
     int tipo;
     std::vector< Insumo* > locais;
 
@@ -14,7 +14,7 @@ class Local {
     Local();
 
     // SET Methods
-    void setLocal(std::string);
+    void setNomeEstado(std::string);
     void setInsumoParaLocal();
 
     // GET Methods
