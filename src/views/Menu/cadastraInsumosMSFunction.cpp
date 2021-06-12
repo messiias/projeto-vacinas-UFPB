@@ -38,7 +38,8 @@ Insumo* cadastroDeInsumoMS(int userValue){
     case 1:
       system("clear");
       std::cout << "Digite o nome da vacina: ";
-      std::cin >> nome;
+      std::cin.ignore();
+      std::getline(std::cin, nome);
       vac->setNome(nome);
       
       std::cout << "Quantidade de itens: ";
@@ -54,13 +55,14 @@ Insumo* cadastroDeInsumoMS(int userValue){
       vac->setDataVencimento(dataVencimento);
 
       std::cout << "Fabricante: ";
-      std::cin >> fabricante;
+      std:: cin.ignore();
+      std::getline(std::cin, fabricante);
       vac->setFabricante(fabricante);
 
       vac->setTipoInsumo(1);
 
       std::cout << "Tipo da vacina: ";
-      std::cin >> tipoVacina;
+      std::getline(std::cin, tipoVacina);
       vac->setTipoVacina(tipoVacina);
 
       std::cout << "Doses:  ";
@@ -77,7 +79,8 @@ Insumo* cadastroDeInsumoMS(int userValue){
     case 2:
       system("clear");
       std::cout << "Digite o nome da vacina: ";
-      std::cin >> nome;
+      std::cin.ignore();
+      std::getline(std::cin, nome);
       med->setNome(nome);
       
       std::cout << "Quantidade de itens: ";
@@ -93,7 +96,8 @@ Insumo* cadastroDeInsumoMS(int userValue){
       med->setDataVencimento(dataVencimento);
 
       std::cout << "Fabricante: ";
-      std::cin >> fabricante;
+      std:: cin.ignore();
+      std::getline(std::cin, fabricante);
       med->setFabricante(fabricante);
 
       med->setTipoInsumo(2);
@@ -103,11 +107,13 @@ Insumo* cadastroDeInsumoMS(int userValue){
       med->setDosagem(dosagemMedicamentos);
 
       std::cout << "Forma de administração: ";
-      std::cin >> formaAdministracao;
+      std:: cin.ignore();
+      std::getline(std::cin, formaAdministracao);
       med->setFormaAdmin(formaAdministracao);
       
       std::cout << "Forma de disponibilização: ";
-      std::cin >> formaDisponibilizacao;
+      std:: cin.ignore();
+      std::getline(std::cin, formaDisponibilizacao);
       med->setDisponibilizacao(formaDisponibilizacao);
 
       system("clear");
@@ -117,7 +123,8 @@ Insumo* cadastroDeInsumoMS(int userValue){
       system("clear");
       
       std::cout << "Digite o nome da vacina: ";
-      std::cin >> nome;
+      std::cin.ignore();
+      std::getline(std::cin, nome);
       epi->setNome(nome);
       
       std::cout << "Quantidade de itens: ";
@@ -133,17 +140,19 @@ Insumo* cadastroDeInsumoMS(int userValue){
       epi->setDataVencimento(dataVencimento);
 
       std::cout << "Fabricante: ";
-      std::cin >> fabricante;
+      std:: cin.ignore();
+      std::getline(std::cin, fabricante);
       epi->setFabricante(fabricante);
 
       epi->setTipoInsumo(3);
 
       std::cout << "Tipo de Epi: ";
-      std::cin >> tipoEpi;
+      std:: cin.ignore();
+      std::getline(std::cin, tipoEpi);
       epi->setTipoEpi(tipoEpi);
 
       std::cout << "Informação sobre a Epi: ";
-      std::cin >> infoEpi;
+      std::getline(std::cin, infoEpi);
       epi->setInfoEpi(infoEpi);
 
       system("clear");

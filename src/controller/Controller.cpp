@@ -7,8 +7,6 @@
 #include "../models/Vacina/Vacina.h"
 #include "../models/EPI/Epi.h"
 
-using namespace std;
-
 Controller::Controller(){
 
   std::string arrayEstados[] = {
@@ -16,81 +14,136 @@ Controller::Controller(){
   };
   
   for(int i = 0; i < 27; i++) {
-    Local novoEstado = Local();
-    novoEstado.setNomeEstado(arrayEstados[i]);
+    Local *novoEstado = new Local();
+    novoEstado->setNomeEstado(arrayEstados[i]);
+
+    this->locais.push_back(novoEstado);
   }
 }
 
 
+// MINISTERIO DA SAUDE
+
+// METODO DE CADASTRO DE INSUMOS
 void Controller::cadastraInsumosMS(Insumo *novoElemento){
   this->insumosMS.push_back(novoElemento);
 }
 
+// METODO DE CONSULTA DOS INSUMOS DO MINISTERIO DA SAUDE
 void Controller::consultaInsumosMS(int userValue){
   switch (userValue) {
     case 1:
-      for(auto elem: this->insumosMS) cout << elem->getDescricao() << endl;
+      for(auto elem: this->insumosMS) std::cout << elem->getDescricao() << std::endl;
       break;
     case 2:
       for(auto elem: this->insumosMS){
-        if(elem->getTipoInsumo() == 1) cout << elem->getDescricao() << endl;
+        if(elem->getTipoInsumo() == 1) std::cout << elem->getDescricao() << std::endl;
       }
       break;
     case 3:
       for(auto elem: this->insumosMS){
-        if(elem->getTipoInsumo() == 2) cout << elem->getDescricao() << endl;
+        if(elem->getTipoInsumo() == 2) std::cout << elem->getDescricao() << std::endl;
       }
       break;
     case 4:
       for(auto elem: this->insumosMS){
-        if(elem->getTipoInsumo() == 3) cout << elem->getDescricao() << endl;
+        if(elem->getTipoInsumo() == 3) std::cout << elem->getDescricao() << std::endl;
       }
       break;
   }
 }
 
-/*
-void Controller::distribuiInsumoParaEstado(){}
-*/
+// ESTADOS
 
-/*
-void Controller::consultaInsumosES(Local insumosCadastradosES) {
-  vector < Insumo* > teste = insumosCadastradosES.getLocais();
+// METODO PARA DISTRIBUICAO DE INSUMOS PARA ESTADOS
+void Controller::distribuiInsumoParaEstado(std::string estado, std::string insumo, int quantidade) {
+  bool estadoEncontrado = false, insumoEncontrado = false, insumoExisteEstado = false;
 
-
-  for(auto x: teste) {
-    teste.at();
-  } 
-}
-*/
-
-/* void Controller::consultaInsumosDescricao(Local locais){
-    int userValue;
-
-    cout << "Deseja consultar estoque de qual insumo?\n1: Vacina;\n2: Medicamentos;\n3: EPI;\n: ";
-    cin >> userValue;
-    
-    switch (userValue)
-    {
-    case 1:
-
-        for(i = 0 ; i < locais.Ins.size(), i++){
-            // ...;
-        }
-        break;
-    case 2:
-        
-        break;
-
-    default:
-        break;
+  for(auto elem: this->insumosMS) {
+    if(elem->getNome() == insumo) {
+      insumoEncontrado = true;
+      break;
     }
+  }
+
+  if(!insumoEncontrado) {
+    throw "Insumo não encontrado";
+  }
+
+  // 
+  for(auto elem: this->locais) {
+    if(elem->getNomeEstado() == estado) {
+
+      std::vector < Insumo* > auxVector = elem->getInsumos();
+      for(auto aux: auxVector) {
+        if(aux->getNome() == insumo) {
+
+          Insumo *novoElemento = aux->clone(quantidade);
+          elem->setInsumoParaLocal(novoElemento);
+          insumoExisteEstado = true;
+          break;
+        }
+      }
+
+      if(!insumoExisteEstado) {
+        for(auto aux: this->insumosMS) {
+          if(aux->getNome() == insumo) {
+            Insumo *novoElemento = aux->clone(quantidade);
+            elem->setInsumoParaLocal(novoElemento);
+
+            break;
+          }
+        }
+      }
+
+      estadoEncontrado = true;
+
+      break;
+    }
+  }
+
+  if(!estadoEncontrado) throw "Estado não encontrado";
 }
 
-Insumo cadastraInsumosTipo(Local locais, int){
 
+// CONSULTA INSUMOS DO ESTADO
+void Controller::consultaInsumosES(std::string estado) {
+  bool encontrado = false;
+
+  for(auto elem: this->locais) {
+    if(elem->getNomeEstado() == estado) {
+      std::vector < std::string > auxVector = elem->getInsumosNome();
+      
+      // Percorre o vector de Insumos e mostra o nome de cada Insumo
+      for(auto aux: auxVector) std::cout << aux << ", ";
+      std::cout << std::endl;
+      encontrado = true;
+
+      break;
+    }
+  }
+
+  if(!encontrado) throw "Estado não encontrado";
 }
 
-void Controller::distribuiInsumo(Local locais, Insumo){
 
-} */
+// CONSULTA DAS DESCRICOES DOS ESTADO
+void Controller::consultaInsumosDescricaoES(std::string estado) {
+  bool encontrado = false;
+
+  for(auto elem: this->locais) {
+    if(elem->getNomeEstado() == estado) {
+      std::vector < Insumo* > auxVector = elem->getInsumos();
+
+      for(auto aux: auxVector) std::cout << aux->getDescricao() << std::endl;
+
+      // Variável de controle para verificar se o elemento foi encontrado ou não
+      encontrado = true;
+
+      // Cancela o for uma vez que o estado desejado foi encontrado
+      break;
+    }
+  }
+
+  if(!encontrado) throw "Estado não encontrado";
+}

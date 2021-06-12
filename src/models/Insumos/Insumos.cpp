@@ -28,6 +28,7 @@ void Insumo::setTipoInsumo(int tipoInsumo) {
   this->tipoInsumo = tipoInsumo;
 };
 
+// GET Methods
 std::string Insumo::getDescricao() {
   
   std::string descricao;
@@ -48,4 +49,13 @@ std::string Insumo::getDescricao() {
 
 int Insumo::getTipoInsumo() {
   return this->tipoInsumo;
+}
+
+std::string Insumo::getNome() {
+  return this->nome;
+}
+
+// Clone Method
+Insumo* Insumo::clone(int quantidade) {
+  return 0;
 }

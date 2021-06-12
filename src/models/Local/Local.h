@@ -6,18 +6,19 @@
 
 class Local {
   private:
-    std::vector<std::string> localNome;
+    std::string localNome;
     int tipo;
-    std::vector< Insumo* > locais;
+    std::vector< Insumo* > insumosDoLocal;
 
   public:
     Local();
 
     // SET Methods
     void setNomeEstado(std::string);
-    void setInsumoParaLocal();
+    void setInsumoParaLocal(Insumo*);
 
     // GET Methods
     std::string getNomeEstado();
-    int getTipo();
+    std::vector < std::string > getInsumosNome();
+    std::vector < Insumo* > getInsumos();
 };

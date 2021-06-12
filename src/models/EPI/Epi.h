@@ -17,4 +17,7 @@ class Epi : public Insumo {
     // GET Methods
     std::string getDescricao();
     int getTipoInsumo();
+
+    // Clone Method
+    Insumo* clone(int);
 };

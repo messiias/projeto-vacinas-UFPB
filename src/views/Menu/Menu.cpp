@@ -2,7 +2,6 @@
 #include <string>
 #include "Menu.h"
 #include "cadastraInsumosMSFunction.cpp"
-#include "distribuiInsumoFunction.cpp"
 #include "../../controller/Controller.h"
 #include "../../models/Local/Local.h"
 #include "../../models/Insumos/Insumos.h"
@@ -15,20 +14,23 @@ void Menu::Menu1(){
   Local *instLocal = new Local();
 
   int userValue = 0;
+  std::string userValueIn, userValueES;
   bool loop = true;
-  
+  std::string arrayEstados[] = {
+    "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS", "MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO"
+  };
 
   while(loop){
     std::cout << "=====================================\n\tMinisterio da saúde\t\n=====================================" << std::endl << std::endl;
 
-    std::cout << "1 - Cadastrar insumo no MS\n2 - Consulta insumos disponiveis no MS\n3 - Descrição dos insumos no MS" << std::endl;
-    std::cout << "4 - Distribui insumos pros estados\n5 - Consulta insumos disponiveis em um estado\n6 - Descrição dos insumos em um estado\n7 - Sair\n: ";
+    std::cout << "1 - Cadastrar insumo no MS\n2 - Consulta insumos disponiveis no MS\n" << std::endl;
+    std::cout << "3 - Distribui insumos pros estados\n4 - Consulta insumos disponiveis em um estado\n5 - Descrição dos insumos em um estado\n6 - Sair\n: ";
     std::cin >> userValue;
     
     switch (userValue) {
       case 1:
         system("clear");
-        std::cout << "Qual insumo deseja inserir no MS?\n1 - Vacina\n2 - Medicamento\n3 - EPI\n4 - Sair\n: ";
+        std::cout << "Qual insumo deseja inserir no MS?\n1 - Vacina\n2 - Medicamento\n3 - EPI\n4 - Voltar\n: ";
         std::cin >> userValue;
         if(userValue >= 1 && userValue <= 3)
           instControl->cadastraInsumosMS(cadastroDeInsumoMS(userValue));
@@ -36,33 +38,59 @@ void Menu::Menu1(){
 
       case 2:
         system("clear");
-        std::cout << "Qual insumo deseja consultar do MS?\n1 - Todos\n2 - Vacina\n3 - Medicamento\n4 - EPI\n5 - Sair\n: ";
+        std::cout << "Deseja consultar os dados dos insumos do MS?\n1 - Todos\n2 - Vacina\n3 - Medicamento\n4 - EPI\n5 - Voltar\n: ";
         std::cin >> userValue;
         if(userValue >= 1 && userValue <= 4)
           instControl->consultaInsumosMS(userValue);
         break;
-      /*
+
       case 3:
-        std::cout << "Qual insumo deseja consultar do MS?\n1 - Vacina\n2 - Medicamento\n3 - EPI\n4 - Sair: ";
-        if(userValue >= 1 && userValue <= 3)
-          instControl->consultaDescricaoInsumoMS(userValue);
+        system("clear");
+
+        std::cout << "Deseja cadastrar em que estado?" << std::endl;
+        for (int i = 0; i < 27; i++){
+          std::cout << arrayEstados[i] << std::endl;
+        }
+        std::cout << ": ";
+        std::cin >> userValueES;
+
+        std::cout << "Nome do insumo\n" << ": ";
+        std::cin >> userValueIn;
+
+        std::cout << "Quantidade de insumos deseja receber?\n" << ": ";
+        std::cin >> userValue; 
+        
+        instControl->distribuiInsumoParaEstado(userValueES, userValueIn, userValue);
+
         break;
-      */
+
       case 4:
         system("clear");
-        std::cout << "Deseja cadastrar em que estado?" << std::endl;
-        std::cout << instLocal->getNomeEstado();
-        // distribuiInsumo(userValue);
+        
+        std::cout << "Deseja consultar os dados de qual estado?" << std::endl;
+        for (int i = 0; i < 27; i++){
+          std::cout << arrayEstados[i] << std::endl;
+        }
+        std::cout << ": ";
+        std::cin >> userValueES;
+
+        instControl->consultaInsumosES(userValueES);
         break;
-      /*
+
       case 5:
-        cadastraInsumosTipo(Local, int);
+        system("clear");
+
+        std::cout << "Deseja consultar a descricao de qual estado?" << std::endl;
+        for (int i = 0; i < 27; i++){
+          std::cout << arrayEstados[i] << std::endl;
+        }
+        std::cout << ": ";
+        std::cin >> userValueES;
+
+        instControl->consultaInsumosDescricaoES(userValueES);
         break;
+
       case 6:
-        distribuiInsumo(Local, Insumo);
-        break;
-      */
-      case 7:
         loop = false;
         break;
     }

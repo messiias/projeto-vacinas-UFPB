@@ -18,4 +18,7 @@ class Medicamentos : public Insumo {
 
     // GET Methods
     std::string getDescricao();
+
+    // Clone Method
+    Insumo* clone(int);
 };
