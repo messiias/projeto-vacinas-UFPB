@@ -23,7 +23,7 @@ void Menu::Menu1(){
   while(loop){
     std::cout << "=====================================\n\tMinisterio da saúde\t\n=====================================" << std::endl << std::endl;
 
-    std::cout << "1 - Cadastrar insumo no MS\n2 - Consulta insumos disponiveis no MS\n" << std::endl;
+    std::cout << "1 - Cadastrar insumo no MS\n2 - Consulta insumos disponiveis no MS" << std::endl;
     std::cout << "3 - Distribui insumos pros estados\n4 - Consulta insumos disponiveis em um estado\n5 - Descrição dos insumos em um estado\n6 - Sair\n: ";
     std::cin >> userValue;
     
@@ -55,7 +55,8 @@ void Menu::Menu1(){
         std::cin >> userValueES;
 
         std::cout << "Nome do insumo\n" << ": ";
-        std::cin >> userValueIn;
+        std::cin.ignore();
+        std::getline(std::cin, userValueIn);
 
         std::cout << "Quantidade de insumos deseja receber?\n" << ": ";
         std::cin >> userValue; 

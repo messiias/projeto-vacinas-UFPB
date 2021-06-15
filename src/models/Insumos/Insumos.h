@@ -27,6 +27,7 @@ class Insumo{
     //GET Method
     virtual std::string getDescricao();
     int getTipoInsumo();
+    int getQuantidade();
     std::string getNome();
 
     // Clone Method

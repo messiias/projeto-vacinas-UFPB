@@ -47,6 +47,10 @@ std::string Insumo::getDescricao() {
   return descricao;
 }
 
+int Insumo::getQuantidade() {
+  return this->quantidadeItem;
+}
+
 int Insumo::getTipoInsumo() {
   return this->tipoInsumo;
 }

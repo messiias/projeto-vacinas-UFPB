@@ -30,13 +30,15 @@ Insumo* cadastroDeInsumoMS(int userValue){
   std::string infoEpi;
   
   // Variavel
-  Vacina *vac = new Vacina();
-  Medicamentos *med = new Medicamentos;
-  Epi *epi = new Epi;
+  Vacina *vac;
+  Medicamentos *med;
+  Epi *epi;
 
   switch (userValue){
     case 1:
       system("clear");
+      
+      vac = new Vacina();
       std::cout << "Digite o nome da vacina: ";
       std::cin.ignore();
       std::getline(std::cin, nome);
@@ -65,7 +67,7 @@ Insumo* cadastroDeInsumoMS(int userValue){
       std::getline(std::cin, tipoVacina);
       vac->setTipoVacina(tipoVacina);
 
-      std::cout << "Doses:  ";
+      std::cout << "Doses: ";
       std::cin >> dose;
       vac->setDose(dose);
 
@@ -78,7 +80,9 @@ Insumo* cadastroDeInsumoMS(int userValue){
       
     case 2:
       system("clear");
-      std::cout << "Digite o nome da vacina: ";
+      
+      med = new Medicamentos;
+      std::cout << "Digite o nome da medicamento: ";
       std::cin.ignore();
       std::getline(std::cin, nome);
       med->setNome(nome);
@@ -112,7 +116,6 @@ Insumo* cadastroDeInsumoMS(int userValue){
       med->setFormaAdmin(formaAdministracao);
       
       std::cout << "Forma de disponibilização: ";
-      std:: cin.ignore();
       std::getline(std::cin, formaDisponibilizacao);
       med->setDisponibilizacao(formaDisponibilizacao);
 
@@ -122,7 +125,8 @@ Insumo* cadastroDeInsumoMS(int userValue){
     case 3:
       system("clear");
       
-      std::cout << "Digite o nome da vacina: ";
+      epi = new Epi();
+      std::cout << "Digite o nome da epi: ";
       std::cin.ignore();
       std::getline(std::cin, nome);
       epi->setNome(nome);

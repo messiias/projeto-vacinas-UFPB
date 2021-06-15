@@ -58,16 +58,22 @@ void Controller::consultaInsumosMS(int userValue){
 // METODO PARA DISTRIBUICAO DE INSUMOS PARA ESTADOS
 void Controller::distribuiInsumoParaEstado(std::string estado, std::string insumo, int quantidade) {
   bool estadoEncontrado = false, insumoEncontrado = false, insumoExisteEstado = false;
+  int quantidadeAtualInsumo = 0, cont = 0;
 
   for(auto elem: this->insumosMS) {
     if(elem->getNome() == insumo) {
       insumoEncontrado = true;
+      quantidadeAtualInsumo = elem->getQuantidade();
       break;
     }
   }
 
   if(!insumoEncontrado) {
-    throw "Insumo não encontrado";
+    std::cout << "Insumo não encontrado\n\n";
+    return;
+  } else if(quantidade > quantidadeAtualInsumo){
+    std::cout << "Quantidade maior do que o insumo possui.\n\n";
+    return;
   }
 
   // 
@@ -77,9 +83,17 @@ void Controller::distribuiInsumoParaEstado(std::string estado, std::string insum
       std::vector < Insumo* > auxVector = elem->getInsumos();
       for(auto aux: auxVector) {
         if(aux->getNome() == insumo) {
+          int auxQuantidade = aux->getQuantidade();
+          aux->setQuantidadeItem(auxQuantidade + quantidade);
 
-          Insumo *novoElemento = aux->clone(quantidade);
-          elem->setInsumoParaLocal(novoElemento);
+          //Atualiza MS
+          for(auto auxMS: this->insumosMS){
+            if(auxMS->getNome() == insumo) {
+              int auxQuantidadeMS = auxMS->getQuantidade();
+              auxMS->setQuantidadeItem(auxQuantidadeMS - quantidade);
+            }
+          }
+
           insumoExisteEstado = true;
           break;
         }
@@ -101,8 +115,17 @@ void Controller::distribuiInsumoParaEstado(std::string estado, std::string insum
       break;
     }
   }
+  
+  for (auto elem: this->insumosMS){
+    cont++;
 
-  if(!estadoEncontrado) throw "Estado não encontrado";
+    if((elem->getNome() == insumo) && (quantidadeAtualInsumo == quantidade)){
+      delete(elem);
+
+      this->insumosMS.erase(this->insumosMS.begin() + (cont - 1));
+      break;
+    }
+  }
 }
 
 
@@ -123,7 +146,7 @@ void Controller::consultaInsumosES(std::string estado) {
     }
   }
 
-  if(!encontrado) throw "Estado não encontrado";
+  if(!encontrado) std::cout << "Estado não encontrado\n\n";
 }
 
 
@@ -145,5 +168,5 @@ void Controller::consultaInsumosDescricaoES(std::string estado) {
     }
   }
 
-  if(!encontrado) throw "Estado não encontrado";
+  if(!encontrado) std::cout << "Estado não encontrado\n\n";
 }
